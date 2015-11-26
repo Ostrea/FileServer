@@ -10,10 +10,17 @@
         Name: <input type="text" name="name"><br /> <br />
         <input type="submit" value="Upload"> Press here to upload the file!
     </form>
+    <br />
 
     <form method="POST" enctype="multipart/form-data" action="/download">
         UUID: <input type="text" name="uuid"><br /> <br />
         <input type="submit" value="Download"> Press here to download the file!
+    </form>
+    <br />
+
+    <form method="POST" enctype="multipart/form-data" action="/delete">
+        UUID: <input type="text" name="uuid"><br /> <br />
+        <input type="submit" value="Delete"> Press here to delete the file!
     </form>
 </body>
 </html>
