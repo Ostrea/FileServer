@@ -8,6 +8,8 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.UUID;
 
+import my.ostrea.Constants;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FileUploadController {
-    private static final String ROOT_SERVER_FOLDER = "/home/ostrea/serverFolder";
-
     @RequestMapping(value="/upload", method=RequestMethod.GET)
     public @ResponseBody String provideUploadInfo() {
         return "You can upload a file by posting to this same URL.";
@@ -37,7 +37,7 @@ public class FileUploadController {
 
                 try (BufferedOutputStream stream =
                              new BufferedOutputStream(
-                                     new FileOutputStream(new File(ROOT_SERVER_FOLDER + "/" + name)))) {
+                                     new FileOutputStream(new File(Constants.ROOT_SERVER_FOLDER + "/" + name)))) {
                     stream.write(bytes);
                 }
 
@@ -51,7 +51,8 @@ public class FileUploadController {
     }
 
     private boolean checkForExistingFiles(UUID userUploadedFileUuid) {
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(ROOT_SERVER_FOLDER))) {
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(
+                Paths.get(Constants.ROOT_SERVER_FOLDER))) {
             for (Path currentFile : directoryStream) {
                 if (!Files.isDirectory(currentFile)) {
                     UUID currentFileUuid = UUID.nameUUIDFromBytes(Files.readAllBytes(currentFile));
