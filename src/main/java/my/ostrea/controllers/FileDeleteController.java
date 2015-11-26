@@ -2,7 +2,6 @@ package my.ostrea.controllers;
 
 import my.ostrea.Constants;
 import my.ostrea.exceptions.FileDoesNotExist;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
